@@ -3,53 +3,55 @@ import { notFound } from "next/navigation";
 import { Phone } from "lucide-react";
 import Link from "next/link";
 
-type Props = {
-  params: {
-    city: string;
-    service: string;
-  };
-};
-
+// 🔥 Generate all SEO routes
 export function generateStaticParams() {
-  const paths: { city: string; service: string }[] = [];
-
-  cities.forEach((city) => {
-    services.forEach((service) => {
-      paths.push({
-        city,
-        service: service.slug,
-      });
-    });
-  });
-
-  return paths;
+  return cities.flatMap((city) =>
+    services.map((service) => ({
+      city,
+      service: service.slug,
+    }))
+  );
 }
 
-export function generateMetadata({ params }: Props) {
-  const city = params.city.replace("-", " ");
-  const service = services.find((s) => s.slug === params.service);
+// 🔥 NEXT 15: metadata must be async
+export async function generateMetadata({ params }: any) {
+  const { city, service } = await params;
 
-  if (!service) return {};
+  const serviceData = services.find((s) => s.slug === service);
+  const cityName = city?.replace(/-/g, " ") ?? "";
+
+  if (!serviceData || !cityName) return {};
 
   return {
-    title: `${service.title} in ${city} | MA Garage Doors`,
-    description: `Professional ${service.title.toLowerCase()} in ${city}. Fast, reliable residential and commercial service.`,
+    title: `${serviceData.title} in ${cityName} | MA Garage Doors`,
+    description: `Professional ${serviceData.title.toLowerCase()} in ${cityName}. Fast, reliable residential and commercial service.`,
   };
 }
 
-export default function Page({ params }: Props) {
-  const city = params.city.replace("-", " ");
-  const service = services.find((s) => s.slug === params.service);
+// 🔥 NEXT 15: page is async + params must be awaited
+export default async function Page({ params }: any) {
+  const { city, service } = await params;
 
-  if (!service) return notFound();
+  if (!city || !service) {
+    return notFound();
+  }
+
+  const cityName = city.replace(/-/g, " ").trim();
+
+  const serviceData = services.find(
+    (s) => s.slug === service
+  );
+
+  if (!serviceData) {
+    return notFound();
+  }
 
   return (
     <>
-      {/* SIMPLE SEO NAVBAR */}
+      {/* NAVBAR */}
       <header className="border-b bg-white">
         <div className="container-custom h-20 flex items-center justify-between">
-          
-          {/* Logo */}
+
           <Link
             href="/"
             className="text-xl font-bold text-[var(--primary)]"
@@ -57,7 +59,6 @@ export default function Page({ params }: Props) {
             MA Garage Doors
           </Link>
 
-          {/* CTA */}
           <a
             href="tel:+14165551234"
             className="btn-primary flex items-center gap-2"
@@ -68,22 +69,22 @@ export default function Page({ params }: Props) {
         </div>
       </header>
 
-      {/* PAGE CONTENT */}
+      {/* CONTENT */}
       <main className="container-custom py-20 max-w-3xl">
-        
-        {/* H1 SEO */}
+
         <h1 className="text-4xl font-bold text-[var(--primary)]">
-          {service.title} in {city}
+          {serviceData.title} in {cityName}
         </h1>
 
         <p className="mt-6 text-slate-600 text-lg">
-          MA Garage Doors provides professional {service.title.toLowerCase()} in {city} for residential, commercial, and industrial properties.
+          MA Garage Doors provides professional{" "}
+          {serviceData.title.toLowerCase()} in {cityName} for residential, commercial, and industrial properties.
         </p>
 
-        {/* CTA BOX */}
+        {/* CTA */}
         <div className="mt-10 p-6 bg-[var(--light)] border rounded-xl">
           <h2 className="text-xl font-bold text-[var(--primary)]">
-            Need service in {city} today?
+            Need service in {cityName} today?
           </h2>
 
           <p className="mt-2 text-slate-600">
@@ -101,12 +102,13 @@ export default function Page({ params }: Props) {
 
         {/* SEO CONTENT */}
         <section className="mt-12 space-y-4 text-slate-700 leading-relaxed">
+
           <h2 className="text-2xl font-bold text-[var(--primary)]">
-            Trusted Garage Door Service in {city}
+            Trusted Garage Door Service in {cityName}
           </h2>
 
           <p>
-            MA Garage Doors specializes in {service.title.toLowerCase()} across {city}.
+            MA Garage Doors specializes in {serviceData.title.toLowerCase()} across {cityName}.
             We work with homeowners, property managers, warehouses, and commercial facilities.
           </p>
 
@@ -126,7 +128,6 @@ export default function Page({ params }: Props) {
             <li>Preventive maintenance</li>
           </ul>
 
-          {/* BACK HOME LINK */}
           <div className="mt-10">
             <Link
               href="/"
@@ -135,6 +136,7 @@ export default function Page({ params }: Props) {
               ← Back to MA Garage Doors Home
             </Link>
           </div>
+
         </section>
       </main>
     </>
