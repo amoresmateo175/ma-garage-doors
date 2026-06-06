@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X, Phone } from "lucide-react";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -19,16 +20,20 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-slate-200">
       <div className="container-custom h-20 flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link
-          href="/"
-          className="text-2xl font-bold text-[var(--primary)]"
-        >
-          MA Garage Doors
+
+        {/* LOGO */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="MA Garage Doors"
+            width={180}
+            height={50}
+            priority
+            className="h-10 w-auto object-contain hover:scale-105 transition"
+          />
         </Link>
 
-        {/* Desktop Nav */}
+        {/* DESKTOP NAV */}
         <nav className="hidden md:flex items-center gap-8">
           {links.map((link) => (
             <Link
@@ -40,7 +45,7 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {/* Primary CTA */}
+          {/* CTA */}
           <a
             href="tel:+14165551234"
             className="btn-primary flex items-center gap-2"
@@ -50,7 +55,7 @@ export default function Navbar() {
           </a>
         </nav>
 
-        {/* Mobile Button */}
+        {/* MOBILE BUTTON */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden text-slate-800"
@@ -60,7 +65,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div
