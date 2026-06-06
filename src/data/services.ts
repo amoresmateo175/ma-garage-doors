@@ -1,25 +1,28 @@
-export const services = [
-  {
-    title: "Residential Garage Doors",
-    description:
-      "Installation, repair, maintenance, spring replacement, opener installation, track alignment, cable replacement, and complete garage door solutions for homeowners.",
-  },
+export type Service = {
+  title: string;
+  description: string;
+  slug: string;
+};
 
+export const services: Service[] = [
+  {
+    title: "Garage Door Repair",
+    description: "Professional repair for residential and commercial garage doors.",
+    slug: "garage-door-repair",
+  },
+  {
+    title: "Garage Door Installation",
+    description: "Installation of new garage doors for homes and businesses.",
+    slug: "garage-door-installation",
+  },
   {
     title: "Commercial Overhead Doors",
-    description:
-      "Professional installation and servicing of sectional doors, rolling steel doors, high-cycle systems, commercial operators, and industrial access solutions.",
+    description: "Heavy-duty overhead door systems for warehouses and commercial buildings.",
+    slug: "commercial-overhead-doors",
   },
-
   {
-    title: "Loading Dock Equipment",
-    description:
-      "Inspection, maintenance, repair, and installation of hydraulic dock levelers and loading dock equipment to keep facilities operating safely and efficiently.",
-  },
-
-  {
-    title: "Emergency Repairs",
-    description:
-      "Fast response for broken springs, damaged tracks, operator failures, off-track doors, and urgent access issues affecting your property or business.",
+    title: "Emergency Service",
+    description: "24/7 emergency garage door repair and support.",
+    slug: "emergency-service",
   },
 ];
