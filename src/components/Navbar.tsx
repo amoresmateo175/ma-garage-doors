@@ -47,7 +47,7 @@ export default function Navbar() {
 
           {/* CTA */}
           <a
-            href="tel:+14165551234"
+            href="tel:+1416555123"
             className="btn-primary flex items-center gap-2"
           >
             <Phone size={16} />

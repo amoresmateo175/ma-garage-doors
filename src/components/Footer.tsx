@@ -25,7 +25,7 @@ export default function Footer() {
         <div>
           <h4 className="font-semibold">Contact</h4>
           <p className="mt-3 text-white/70">
-            Phone: +1 (416) 555-1234
+            Phone: +1 (416) 555-123
           </p>
           <p className="text-white/70">
             Email: info@magaragedoors.com

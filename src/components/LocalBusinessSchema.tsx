@@ -4,7 +4,7 @@ export default function LocalBusinessSchema() {
     "@type": "LocalBusiness",
     name: "MA Garage Doors",
     image: "https://example.com/images/logo.png",
-    telephone: "+1-416-555-1234",
+    telephone: "+1-416-555-123",
     email: "info@magaragedoors.com",
     address: {
       "@type": "PostalAddress",

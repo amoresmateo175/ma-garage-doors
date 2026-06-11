@@ -32,7 +32,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="tel:+14165551234"
+              href="tel:+1416555123"
               className="btn-secondary"
             >
               Call Now
