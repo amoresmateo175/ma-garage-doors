@@ -1,36 +1,150 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+
 import { testimonials } from "@/data/testimonials";
-import { fadeUp, staggerContainer } from "@/lib/animations";
+
 
 export default function Testimonials() {
+
+
+  const [mounted, setMounted] = useState(false);
+
+
+
+  const autoplay = useMemo(
+    () =>
+      Autoplay({
+        delay: 4500,
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+      }),
+    []
+  );
+
+
+
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      align: "start",
+    },
+
+    mounted
+      ? [autoplay]
+      : []
+  );
+
+
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
+
+
   return (
+
     <section className="section-padding">
+
+
       <div className="container-custom text-center">
-        <h2 className="section-title">What Clients Say</h2>
+
+
+        <h2 className="section-title">
+          What Clients Say
+        </h2>
+
+
 
         <p className="section-subtitle mx-auto">
-          Real feedback from residential and commercial customers.
+          Real feedback from residential and commercial customers across the Greater Toronto Area.
         </p>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-6 mt-14"
+
+
+
+        {/* CAROUSEL */}
+
+        <div
+          ref={emblaRef}
+          className="overflow-hidden mt-14"
         >
-          {testimonials.map((t) => (
-            <motion.div key={t.name} variants={fadeUp} className="card text-left">
-              <p className="text-slate-600">"{t.text}"</p>
-              <h4 className="mt-4 font-bold text-[var(--primary)]">
-                {t.name}
-              </h4>
-            </motion.div>
-          ))}
-        </motion.div>
+
+
+          <div className="flex">
+
+
+            {testimonials.map((testimonial) => (
+
+
+              <div
+                key={testimonial.name}
+                className="flex-[0_0_90%] sm:flex-[0_0_70%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-3"
+              >
+
+
+                <div
+                  className="card text-left h-full"
+                >
+
+
+                  {/* STARS */}
+
+                  <div className="mb-4 text-yellow-500">
+                    ★★★★★
+                  </div>
+
+
+
+
+                  {/* REVIEW */}
+
+                  <p className="text-slate-600 leading-relaxed">
+                    "{testimonial.text}"
+                  </p>
+
+
+
+
+                  {/* NAME */}
+
+                  <h4 className="mt-5 font-bold text-[var(--primary)]">
+                    {testimonial.name}
+                  </h4>
+
+
+
+                  <p className="text-sm text-slate-500 mt-1">
+                    MA Garage Doors Customer
+                  </p>
+
+
+
+                </div>
+
+
+              </div>
+
+
+            ))}
+
+
+          </div>
+
+
+        </div>
+
+
       </div>
+
+
     </section>
+
   );
+
 }

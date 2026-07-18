@@ -32,7 +32,7 @@ export default function Hero() {
             </a>
 
             <a
-              href="tel:+1416555123"
+              href="tel:+14374480053"
               className="btn-secondary"
             >
               Call Now
@@ -47,7 +47,7 @@ export default function Hero() {
           className="relative"
         >
           <Image
-            src="/images/hero.jpg"
+            src="/images/hero.webp"
             alt="Garage Door Installation"
             width={700}
             height={700}

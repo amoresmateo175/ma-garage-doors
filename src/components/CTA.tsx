@@ -11,7 +11,7 @@ export default function CTA() {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a href="tel:+1416555123" className="btn-primary">
+          <a href="tel:+14374480053" className="btn-primary">
             Call Now
           </a>
 

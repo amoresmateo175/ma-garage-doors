@@ -18,7 +18,7 @@ export default function About() {
           viewport={{ once: true }}
         >
           <Image
-            src="/images/about.jpg"
+            src="/images/about.webp"
             alt="Garage Door Technician"
             width={700}
             height={700}

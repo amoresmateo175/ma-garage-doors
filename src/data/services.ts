@@ -21,7 +21,7 @@ export const services: Service[] = [
     slug: "commercial-overhead-doors",
   },
   {
-    title: "Emergency Service",
+    title: "Emergency Garage Door Service",
     description: "24/7 emergency garage door repair and support.",
     slug: "emergency-service",
   },
