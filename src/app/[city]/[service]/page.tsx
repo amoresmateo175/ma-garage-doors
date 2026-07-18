@@ -167,7 +167,6 @@ export default async function Page({ params }: any) {
               alt="MA Garage Doors"
               width={180}
               height={50}
-              priority
               className="h-10 w-auto object-contain hover:scale-105 transition"
             />
           </Link>
@@ -183,7 +182,7 @@ export default async function Page({ params }: any) {
       </header>
 
       {/* CONTENT */}
-      <main className="container-custom py-20 max-w-3xl">
+      <main className="container-custom py-20 max-w-3xl priority">
 
         <h1 className="text-4xl font-bold text-[var(--primary)]">
           {serviceData.title} in {cityData.name}

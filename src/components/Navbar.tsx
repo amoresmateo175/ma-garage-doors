@@ -28,7 +28,6 @@ export default function Navbar() {
             alt="MA Garage Doors"
             width={180}
             height={50}
-            priority
             className="h-10 w-auto object-contain hover:scale-105 transition"
           />
         </Link>
